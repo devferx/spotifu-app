@@ -1,0 +1,29 @@
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: calc(100vh - 120px);
+}
+
+.loginCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  justify-content: space-evenly;
+  width: 500px;
+  padding: 50px 32px;
+  background-color: var(--gray40);
+  border-radius: 20px;
+}
+
+.loginCard img {
+  width: 200px;
+  margin: 0 auto;
+}
+
+.loginCard .button {
+  width: 350px;
+  padding: 15px 32px;
+}
