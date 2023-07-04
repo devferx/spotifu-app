@@ -1,6 +1,6 @@
 import { Topbar } from "./Topbar";
-// import { BottomBar } from "../BottomBar";
 import { Sidebar } from "./Sidebar";
+import { BottomBar } from "./Bottombar";
 
 import styles from "./Layout.module.css";
 
@@ -14,7 +14,7 @@ export function Layout({ children }: LayoutProps) {
       <Topbar />
       <Sidebar />
       <section className={styles.layoutContent}>{children}</section>
-      {/* <BottomBar /> */}
+      <BottomBar />
     </div>
   );
 }

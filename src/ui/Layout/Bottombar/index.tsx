@@ -1,16 +1,19 @@
 import { useContext } from "react";
 import SpotifyPlayer from "react-spotify-web-playback";
 
-import { playerContext } from "../../context/PlayerContext";
-import { authContext } from "../../context/AuthContext";
-import "./styles.css";
+// import { playerContext } from "../../context/PlayerContext";
+import { AuthContext } from "@/context/AuthContext";
 
+import styles from "./Bottombar.module.css";
+
+// TODO: ADD playerContext
 export const BottomBar = () => {
-  const { currentMusic } = useContext(playerContext);
-  const { accessToken } = useContext(authContext);
+  // const { currentMusic } = useContext(playerContext);
+  const currentMusic: any[] = [];
+  const { accessToken } = useContext(AuthContext);
 
   return (
-    <div className="bottom-bar">
+    <div className={styles.container}>
       {currentMusic.length !== 0 && (
         <SpotifyPlayer
           styles={{
@@ -24,7 +27,7 @@ export const BottomBar = () => {
           }}
           play
           showSaveIcon
-          token={accessToken}
+          token={accessToken!}
           uris={currentMusic}
         />
       )}
