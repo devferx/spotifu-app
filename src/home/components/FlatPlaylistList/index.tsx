@@ -1,18 +1,18 @@
 import { useContext } from "react";
 
-import { FlatPlaylistItem } from "../FlatPlaylistItem";
-import { spotifyContext } from "../../context/SpotifyContext";
+import { SpotifyContext } from "@/context/SpotifyContext";
 
-import "./styles.css";
+import styles from "./FlatPlaylistList.module.css";
+import { FlatPlaylistItem } from "./FlatPlaylistItem";
 
 export const FlatPlaylistList = () => {
-  const { featuredPlaylists } = useContext(spotifyContext);
+  const { featuredPlaylists } = useContext(SpotifyContext);
 
   return (
-    <div className="flat-playlist">
+    <div className={styles.flatPlaylist}>
       <h2>Buenos Dias!</h2>
-      {/* Playlist Items */}
-      <div className="flat-playlist__container">
+
+      <div className={styles.container}>
         {featuredPlaylists.map((playlist, i) => (
           <FlatPlaylistItem
             key={

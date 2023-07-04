@@ -3,6 +3,7 @@ import { GetServerSideProps } from "next";
 
 import { AuthContext } from "@/context/AuthContext";
 import { SpotifyContext } from "@/context/SpotifyContext";
+import { FlatPlaylistList } from "@/home/components/FlatPlaylistList";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const code = context.query.code;
@@ -39,5 +40,9 @@ export default function HomePage({ code }: HomePageProps) {
     }
   }, [accessToken, code, login]);
 
-  return <div></div>;
+  return (
+    <div>
+      <FlatPlaylistList />
+    </div>
+  );
 }
