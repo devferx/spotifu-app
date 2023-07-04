@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  padding-bottom: 0;
+  list-style: none;
+  color: var(--gray10);
+}
+
+.listTitle {
+  font-weight: 800;
+  font-size: 12px;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.listItem a {
+  color: var(--grey10);
+  text-decoration: none;
+}
+
+.listItem a.activePlaylist {
+  color: #fff;
+  font-weight: 500;
+}

@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { NavLink } from "react-router-dom";
+import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 
 import "./styles.css";
@@ -11,16 +11,16 @@ const SidebarPlaylistMenuComponent = ({ title, playlists }) => {
       {playlists.map((playlist, i) => (
         <li key={playlist?.id || i} className="sidebar__list__item">
           {playlist === null ? (
-            <a href="/">
+            <Link href="/">
               <Skeleton />
-            </a>
+            </Link>
           ) : (
-            <NavLink
+            <Link
               activeClassName="active-playlist"
               to={`/playlist/${playlist.id}`}
             >
               {playlist.name}
-            </NavLink>
+            </Link>
           )}
         </li>
       ))}
