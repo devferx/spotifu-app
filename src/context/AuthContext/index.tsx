@@ -65,7 +65,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       window.history.pushState({}, "", "/");
     } catch (error) {
       console.log(error);
-      // window.location = "/"
+      window.location.assign("/login");
     }
   };
 

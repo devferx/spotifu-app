@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { GetServerSideProps } from "next";
 
 import { AuthContext } from "@/context/AuthContext";
+import { SpotifyContext } from "@/context/SpotifyContext";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const code = context.query.code;
@@ -27,6 +28,8 @@ interface HomePageProps {
 }
 
 export default function HomePage({ code }: HomePageProps) {
+  const { newReleases, featuredPlaylists, userPlaylists } =
+    useContext(SpotifyContext);
   const { accessToken, login } = useContext(AuthContext);
 
   useEffect(() => {
@@ -34,7 +37,7 @@ export default function HomePage({ code }: HomePageProps) {
       login(code);
       return;
     }
-  }, [accessToken]);
+  }, [accessToken, code, login]);
 
-  return <div>HomePage</div>;
+  return <div></div>;
 }
