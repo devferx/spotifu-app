@@ -7,13 +7,12 @@ import { useRouter } from "next/router";
 import { AUTH_URL } from "@/constants";
 
 import styles from "./TopBar.module.css";
-
-const isLogin = false;
+import { AuthContext } from "@/context/AuthContext";
 
 // TODO: Implement search
 export function Topbar() {
   // const { setSearch } = useContext(spotifyContext);
-  // const { isLogin } = useContext(authContext);
+  const { isLogin } = useContext(AuthContext);
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const router = useRouter();
   const pageIsSearch = router.pathname === "/search";
