@@ -4,6 +4,7 @@ import { GetServerSideProps } from "next";
 import { AuthContext } from "@/context/AuthContext";
 import { SpotifyContext } from "@/context/SpotifyContext";
 import { FlatPlaylistList } from "@/home/components/FlatPlaylistList";
+import { AlbumCardList } from "@/ui/AlbumCardList";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const code = context.query.code;
@@ -43,6 +44,12 @@ export default function HomePage({ code }: HomePageProps) {
   return (
     <div>
       <FlatPlaylistList />
+      <AlbumCardList title="Nuevos Lanzamientos" albumList={newReleases} />
+      <AlbumCardList
+        title="Listas de Reproducción Destacadas"
+        albumList={featuredPlaylists}
+        isPlaylist={true}
+      />
     </div>
   );
 }
