@@ -1,11 +1,11 @@
-.playlist-page__header {
+.header {
   display: flex;
   gap: 24px;
   margin-bottom: 16px;
   padding: 20px;
 }
 
-.playlist-page__header__content {
+.headerContent {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -14,16 +14,16 @@
   max-width: 300px;
 }
 
-.playlist-page__header__content__title {
+.headerContentTitle {
   font-weight: 800;
   font-size: 32px;
   line-height: 44px;
 }
 
-.playlist-page__header__content__btn {
+.headerContentBtn {
   transition: 0.3s transform;
 }
 
-.playlist-page__header__content__btn:active {
+.headerContentBtn:active {
   transform: scale(0.9);
 }
