@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import type { GetServerSideProps } from "next";
 
 import { SpotifyContext } from "@/context/SpotifyContext";
+import { PlayerContext } from "@/context/PlayerContext";
 
 import { TrackList } from "@/ui/TrackList";
 
@@ -26,9 +27,10 @@ interface PlayslistPageProps {
   playlistId: string;
 }
 
-// TODO: Add playPlaylist function
 export default function PlayslistPage({ playlistId }: PlayslistPageProps) {
   const { getPlaylist } = useContext(SpotifyContext);
+  const { playPlaylist } = useContext(PlayerContext);
+
   const [playlist, setPlaylist] = useState<
     SpotifyApi.SinglePlaylistResponse | undefined
   >(undefined);
@@ -60,7 +62,7 @@ export default function PlayslistPage({ playlistId }: PlayslistPageProps) {
           <p>{playlist.followers.total.toLocaleString()} SEGUIDORES</p>
           <button
             className={`${styles.headerContentBtn} button button-text`}
-            // onClick={() => playPlaylist(playlist.tracks.items)}
+            onClick={() => playPlaylist(playlist.tracks.items)}
           >
             Repoducir
           </button>

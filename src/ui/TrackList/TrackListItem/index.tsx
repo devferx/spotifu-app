@@ -2,13 +2,12 @@ import { useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-// import { playerContext } from "@/context/PlayerContext";
+import { PlayerContext } from "@/context/PlayerContext";
 
 import { millisToMinutesAndSeconds } from "@/shared/utils/millisToMinutesAndSeconds";
 import { getSmallerImage } from "@/shared/utils/getSmallerImage";
 
 import playIcon from "@/assets/icons/play.svg";
-
 import styles from "./TrackListItem.module.css";
 
 interface TrackListItemProps {
@@ -17,9 +16,7 @@ interface TrackListItemProps {
 
 // TODO: Add playSong function
 export const TrackListItem = ({ track }: TrackListItemProps) => {
-  // const { playSong } = useContext(playerContext);
-
-  const playSong = (track: SpotifyApi.TrackObjectFull) => {};
+  const { playSong } = useContext(PlayerContext);
 
   const handleClick = (
     ev: React.MouseEvent,

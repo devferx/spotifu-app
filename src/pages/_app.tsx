@@ -7,14 +7,17 @@ import { Layout } from "@/ui/Layout";
 
 import "@/styles/globals.css";
 import "react-loading-skeleton/dist/skeleton.css";
+import { PlayerProvider } from "@/context/PlayerContext";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
       <SpotifyProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <PlayerProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </PlayerProvider>
       </SpotifyProvider>
     </AuthProvider>
   );

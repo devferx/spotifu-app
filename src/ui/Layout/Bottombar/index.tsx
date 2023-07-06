@@ -1,15 +1,13 @@
 import { useContext } from "react";
 import SpotifyPlayer from "react-spotify-web-playback";
 
-// import { playerContext } from "../../context/PlayerContext";
 import { AuthContext } from "@/context/AuthContext";
 
 import styles from "./Bottombar.module.css";
+import { PlayerContext } from "@/context/PlayerContext";
 
-// TODO: ADD playerContext
 export const BottomBar = () => {
-  // const { currentMusic } = useContext(playerContext);
-  const currentMusic: any[] = [];
+  const { currentMusic } = useContext(PlayerContext);
   const { accessToken } = useContext(AuthContext);
 
   return (
