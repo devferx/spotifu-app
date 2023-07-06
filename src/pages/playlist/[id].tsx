@@ -52,7 +52,7 @@ export default function PlayslistPage({ playlistId }: PlayslistPageProps) {
         <img
           width="300"
           src={playlist.images[0].url}
-          alt={`${playlist.name} cove`}
+          alt={`${playlist.name} cover`}
         />
         <div className={styles.headerContent}>
           <p className={styles.headerContentTitle}>{playlist.name}</p>

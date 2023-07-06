@@ -52,7 +52,11 @@ export const TrackListItem = ({ track }: TrackListItemProps) => {
       </div>
       <div>
         <p className={styles.album}>
-          <Link href={`/album/${track.album.id}`}>{track.album.name}</Link>
+          <Link href={`/album/${track.album.id}`}>
+            {track.album.name.length > 56
+              ? `${track.album.name.substring(0, 56)}...`
+              : track.album.name}
+          </Link>
         </p>
       </div>
       <div>
