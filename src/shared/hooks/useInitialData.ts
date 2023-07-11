@@ -19,7 +19,7 @@ export const useInitialData = (accessToken: string | undefined) => {
 
     const fetchInitialData = async (accessToken: string) => {
       const { data } = await axios.post<InitialResponse>(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/spotify/initial-data`,
+        `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/initial-data`,
         {
           accessToken,
         }

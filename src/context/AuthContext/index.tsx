@@ -30,7 +30,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const login = async (code: string) => {
     try {
       const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login`,
+        `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/auth/login`,
         { code }
       );
 
