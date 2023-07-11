@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 interface PlayerContextProps {
   currentMusic: string[];
-  playSong: (track: SpotifyApi.TrackObjectFull) => void;
+  playSong: (track: string) => void;
   playPlaylist: (track: SpotifyApi.PlaylistTrackObject[]) => void;
 }
 
@@ -15,8 +15,8 @@ interface PlayerProviderProps {
 export function PlayerProvider({ children }: PlayerProviderProps) {
   const [currentMusic, setCurrentMusic] = useState<string[]>([]);
 
-  const playSong = (track: SpotifyApi.TrackObjectFull) => {
-    const newCurrentMusic = [track.uri];
+  const playSong = (uri: string) => {
+    const newCurrentMusic = [uri];
     setCurrentMusic(newCurrentMusic);
   };
 

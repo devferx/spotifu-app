@@ -1,7 +1,5 @@
 import Image from "next/image";
 
-// import { TrackListItem } from "../TrackListItem";
-
 import calendarIcon from "@/assets/icons/calendar.svg";
 import clockIcon from "@/assets/icons/clock.svg";
 
@@ -10,10 +8,9 @@ import { TrackListItem } from "./TrackListItem";
 
 interface TrackListProps {
   tracks: SpotifyApi.PlaylistTrackObject[];
-  isPlaylist?: boolean;
 }
 
-export const TrackList = ({ tracks, isPlaylist = false }: TrackListProps) => {
+export const PlaylistTracks = ({ tracks }: TrackListProps) => {
   return (
     <div className={styles.trackList}>
       <div className={styles.header}>
@@ -30,8 +27,6 @@ export const TrackList = ({ tracks, isPlaylist = false }: TrackListProps) => {
       </div>
 
       {tracks.map((trackParam) => {
-        // TODO: Album type
-        // const track = isPlaylist ? trackParam?.track : trackParam;
         const track = trackParam.track;
 
         if (!track) return null;

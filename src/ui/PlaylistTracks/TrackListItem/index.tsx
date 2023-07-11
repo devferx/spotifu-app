@@ -24,7 +24,7 @@ export const TrackListItem = ({ track }: TrackListItemProps) => {
   ) => {
     if (ev.target instanceof HTMLAnchorElement) return;
 
-    playSong(track);
+    playSong(track.uri);
   };
 
   return (

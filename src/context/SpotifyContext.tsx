@@ -13,6 +13,7 @@ interface SpotifyContextProps {
   getPlaylist: (
     playlistId: string
   ) => Promise<SpotifyApi.SinglePlaylistResponse | undefined>;
+  getAlbumInfo: (albumId: string) => Promise<SpotifyApi.SingleAlbumResponse>;
 }
 
 export const SpotifyContext = createContext({} as SpotifyContextProps);
@@ -42,6 +43,11 @@ export function SpotifyProvider({ children }: SpotifyProviderProps) {
     }
   };
 
+  const getAlbumInfo = async (albumId: string) => {
+    const resp = await spotifyApi.getAlbum(albumId);
+    return resp.body;
+  };
+
   return (
     <SpotifyContext.Provider
       value={{
@@ -49,6 +55,7 @@ export function SpotifyProvider({ children }: SpotifyProviderProps) {
         featuredPlaylists,
         userPlaylists,
         getPlaylist,
+        getAlbumInfo,
       }}
     >
       {children}

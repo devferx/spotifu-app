@@ -1,4 +1,8 @@
-export function getSmallerImage(images: SpotifyApi.ImageObject[]) {
+import { Image } from "@/interfaces";
+
+type Images = (SpotifyApi.ImageObject | Image)[];
+
+export function getSmallerImage(images: Images) {
   const smallerImage = images.reduce((prevImage, currentImage) => {
     if (!prevImage.width) {
       return currentImage;

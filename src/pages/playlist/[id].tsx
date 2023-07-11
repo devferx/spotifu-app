@@ -5,7 +5,7 @@ import type { GetServerSideProps } from "next";
 import { SpotifyContext } from "@/context/SpotifyContext";
 import { PlayerContext } from "@/context/PlayerContext";
 
-import { TrackList } from "@/ui/TrackList";
+import { PlaylistTracks } from "@/ui/PlaylistTracks";
 
 import styles from "@/styles/Playlist.module.css";
 
@@ -69,7 +69,7 @@ export default function PlayslistPage({ playlistId }: PlayslistPageProps) {
         </div>
       </div>
 
-      <TrackList tracks={playlist.tracks.items} isPlaylist={true} />
+      <PlaylistTracks tracks={playlist.tracks.items} />
     </div>
   );
 }
