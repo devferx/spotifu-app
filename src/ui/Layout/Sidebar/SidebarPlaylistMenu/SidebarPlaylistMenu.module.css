@@ -24,3 +24,17 @@
   color: #fff;
   font-weight: 500;
 }
+
+.showAll,
+.showLess {
+  border: none;
+  background: transparent;
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.showLess {
+  color: var(--gray10);
+}
