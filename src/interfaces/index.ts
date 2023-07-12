@@ -32,7 +32,7 @@ export interface Playlist {
   public: boolean | null;
   snapshot_id: string;
   tracks: Tracks;
-  type: UserPlaylistType;
+  type: string;
   uri: string;
 }
 
@@ -47,32 +47,18 @@ export interface Image {
 }
 
 export interface Owner {
-  display_name?: DisplayName;
+  display_name?: string;
   external_urls: ExternalUrls;
   href: string;
   id: string;
-  type: OwnerType;
+  type: string;
   uri: string;
   name?: string;
-}
-
-export enum DisplayName {
-  FerQuinterosG = "Fer Quinteros G.",
-  Spotify = "Spotify",
-}
-
-export enum OwnerType {
-  Artist = "artist",
-  User = "user",
 }
 
 export interface Tracks {
   href: string;
   total: number;
-}
-
-export enum UserPlaylistType {
-  Playlist = "playlist",
 }
 
 export interface NewReleases {
