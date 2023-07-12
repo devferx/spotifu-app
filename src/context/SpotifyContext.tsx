@@ -20,7 +20,6 @@ interface SpotifyContextProps {
   getPlaylist: (
     playlistId: string
   ) => Promise<SpotifyApi.SinglePlaylistResponse | undefined>;
-  getAlbumInfo: (albumId: string) => Promise<SpotifyApi.SingleAlbumResponse>;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -53,11 +52,6 @@ export function SpotifyProvider({ children }: SpotifyProviderProps) {
     }
   };
 
-  const getAlbumInfo = async (albumId: string) => {
-    const resp = await spotifyApi.getAlbum(albumId);
-    return resp.body;
-  };
-
   return (
     <SpotifyContext.Provider
       value={{
@@ -68,7 +62,7 @@ export function SpotifyProvider({ children }: SpotifyProviderProps) {
         searchResults,
         albumsResults,
         getPlaylist,
-        getAlbumInfo,
+
         setSearch,
       }}
     >
