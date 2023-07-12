@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import SpotifyWebApi from "spotify-web-api-node";
 
 const spotifyApi = new SpotifyWebApi({
-  redirectUri: process.env.NEXT_PUBLIC_CLIENT_URL,
+  redirectUri: process.env.NEXT_PUBLIC_URL,
   clientId: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_KEY,
   clientSecret: process.env.SPOTIFY_SECRET_KEY,
 });

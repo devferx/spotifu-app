@@ -43,12 +43,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const login = async (code: string) => {
-    debugger;
     try {
-      const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/auth/login`,
-        { code }
-      );
+      const { data } = await axios.post(`/api/auth/login`, { code });
 
       const { accessToken, refreshToken, expiresIn } = data;
 
@@ -97,12 +93,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const refreshAcessToken = async (refreshTokenParam: string) => {
     try {
-      const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/refresh`,
-        {
-          refreshToken: refreshTokenParam,
-        }
-      );
+      const { data } = await axios.post(`/auth/refresh`, {
+        refreshToken: refreshTokenParam,
+      });
 
       const { accessToken, expiresIn } = data;
       dispatch({

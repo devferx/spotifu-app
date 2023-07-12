@@ -18,12 +18,9 @@ export const useInitialData = (accessToken: string | undefined) => {
     if (!accessToken) return;
 
     const fetchInitialData = async (accessToken: string) => {
-      const { data } = await axios.post<InitialResponse>(
-        `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/initial-data`,
-        {
-          accessToken,
-        }
-      );
+      const { data } = await axios.post<InitialResponse>("/api/initial-data", {
+        accessToken,
+      });
 
       const { newReleases, featuredPlaylists, userPlaylists } = data;
 
