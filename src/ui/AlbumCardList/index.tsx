@@ -12,7 +12,7 @@ import { AlbumCard } from "./AlbumCard";
 
 interface AlbumCardListProps {
   title: string;
-  albumList: (Album | Playlist | null)[];
+  albumList: (Album | Playlist | SpotifyApi.AlbumObjectSimplified | null)[];
   isPlaylist?: boolean;
 }
 

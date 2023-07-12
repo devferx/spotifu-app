@@ -1,43 +1,43 @@
 import { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-// import { SpotifyContext } from "@/context/SpotifyContext";
-// import { AuthContext } from "@/context/AuthContext";
+import { AuthContext } from "@/context/AuthContext";
+import { SpotifyContext } from "@/context/SpotifyContext";
 
 import { AUTH_URL } from "@/constants";
 
 import styles from "./TopBar.module.css";
-import { AuthContext } from "@/context/AuthContext";
 
-// TODO: Implement search
 export function Topbar() {
-  // const { setSearch } = useContext(spotifyContext);
-  const { isLogin } = useContext(AuthContext);
-  const [debouncedSearch, setDebouncedSearch] = useState("");
   const router = useRouter();
+
+  const { setSearch } = useContext(SpotifyContext);
+  const { isLogin } = useContext(AuthContext);
+
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const pageIsSearch = router.pathname === "/search";
 
-  // const handleSearch = (ev) => {
-  //   const newQuery = ev.target.value;
+  const handleSearch = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    const newQuery = ev.target.value;
 
-  //   if (!pageIsSearch?.isExact) {
-  //     history.push("/search");
-  //   }
+    if (!pageIsSearch) {
+      router.push("/search");
+    }
 
-  //   if (newQuery.trim() === "") {
-  //     history.push("/home");
-  //   }
+    if (newQuery.trim() === "") {
+      router.push("/");
+    }
 
-  //   setDebouncedSearch(newQuery);
-  // };
+    setDebouncedSearch(newQuery);
+  };
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     setSearch(debouncedSearch);
-  //   }, 500);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setSearch(debouncedSearch);
+    }, 500);
 
-  //   return () => clearTimeout(timeout);
-  // }, [debouncedSearch, setSearch]);
+    return () => clearTimeout(timeout);
+  }, [debouncedSearch, setSearch]);
 
   return (
     <div className={`${styles.topBar} ${styles.bgGray}`}>
@@ -45,8 +45,8 @@ export function Topbar() {
         <span className={styles.searchInputIcon} aria-label="Search Icon" />
         <input
           type="text"
-          // value={debouncedSearch}
-          // onChange={handleSearch}
+          value={debouncedSearch}
+          onChange={handleSearch}
           autoFocus={pageIsSearch}
           placeholder="Artistas, canciones o podcasts"
         />

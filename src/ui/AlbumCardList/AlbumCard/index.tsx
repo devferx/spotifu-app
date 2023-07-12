@@ -6,7 +6,7 @@ import { Album, Playlist } from "@/interfaces";
 import styles from "./AlbumCard.module.css";
 
 interface AlbumCardProps {
-  album: Album | Playlist | null;
+  album: Album | Playlist | SpotifyApi.AlbumObjectSimplified | null;
 }
 
 export const AlbumCard = ({ album }: AlbumCardProps) => {
