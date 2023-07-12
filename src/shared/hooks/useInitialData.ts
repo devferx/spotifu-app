@@ -18,15 +18,24 @@ export const useInitialData = (accessToken: string | undefined) => {
     if (!accessToken) return;
 
     const fetchInitialData = async (accessToken: string) => {
-      const { data } = await axios.post<InitialResponse>("/api/initial-data", {
-        accessToken,
-      });
+      try {
+        const { data } = await axios.post<InitialResponse>(
+          "/api/initial-data",
+          {
+            accessToken,
+          }
+        );
 
-      const { newReleases, featuredPlaylists, userPlaylists } = data;
+        const { newReleases, featuredPlaylists, userPlaylists } = data;
 
-      setFeaturedPlaylists(featuredPlaylists.playlists.items);
-      setNewReleases(newReleases.items);
-      setUserPlaylists(userPlaylists);
+        setFeaturedPlaylists(featuredPlaylists.playlists.items);
+        setNewReleases(newReleases.items);
+        setUserPlaylists(userPlaylists);
+      } catch (error: any) {
+        if (error.response.status === 401) {
+          window.location.href = "/login";
+        }
+      }
     };
 
     fetchInitialData(accessToken);
