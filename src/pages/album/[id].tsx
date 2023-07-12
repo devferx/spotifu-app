@@ -1,9 +1,10 @@
-import { SpotifyContext } from "@/context/SpotifyContext";
 import { GetServerSideProps } from "next";
-import { useContext, useEffect, useState } from "react";
+
+import { AlbumTracks } from "@/ui/AlbumTracks";
+import { useAlbum } from "@/album/hooks/useAlbum";
 
 import styles from "@/styles/Album.module.css";
-import { AlbumTracks } from "@/ui/AlbumTracks";
+import { LoadingView } from "@/ui/LoadingView";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const albumId = context.params?.id;
@@ -24,27 +25,13 @@ interface AlbumPageProps {
 }
 
 export default function AlbumPage({ albumId }: AlbumPageProps) {
-  const [album, setAlbum] = useState<SpotifyApi.SingleAlbumResponse | null>(
-    null
-  );
-  const { getAlbumInfo } = useContext(SpotifyContext);
+  const { albumQuery } = useAlbum(albumId);
 
-  useEffect(() => {
-    const fetchAlbum = async () => {
-      try {
-        const album = await getAlbumInfo(albumId);
-        setAlbum(album);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchAlbum();
-  }, [albumId, getAlbumInfo]);
-
-  if (!album) {
-    return <p>Loading</p>;
+  if (albumQuery.isLoading || !albumQuery.data) {
+    return <LoadingView />;
   }
+
+  const album = albumQuery.data;
 
   return (
     <div>
