@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import type { GetServerSideProps } from "next";
 
-import { SpotifyContext } from "@/context/SpotifyContext";
+import { usePlaylist } from "@/playlist/hooks/usePlaylist";
 import { PlayerContext } from "@/context/PlayerContext";
 
 import { PlaylistTracks } from "@/ui/PlaylistTracks";
+import { LoadingView } from "@/ui/LoadingView";
 
 import styles from "@/styles/Playlist.module.css";
 
@@ -28,25 +29,14 @@ interface PlayslistPageProps {
 }
 
 export default function PlayslistPage({ playlistId }: PlayslistPageProps) {
-  const { getPlaylist } = useContext(SpotifyContext);
+  const { playlistQuery } = usePlaylist(playlistId);
   const { playPlaylist } = useContext(PlayerContext);
 
-  const [playlist, setPlaylist] = useState<
-    SpotifyApi.SinglePlaylistResponse | undefined
-  >(undefined);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const playlist = await getPlaylist(playlistId);
-      setPlaylist(playlist);
-    };
-
-    fetchData();
-  }, [playlistId, getPlaylist]);
-
-  if (!playlist) {
-    return <p>Loading</p>;
+  if (playlistQuery.isLoading || !playlistQuery.data) {
+    return <LoadingView />;
   }
+
+  const playlist = playlistQuery.data;
 
   return (
     <div>
