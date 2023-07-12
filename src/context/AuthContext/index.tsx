@@ -1,5 +1,6 @@
 import React, { createContext, useReducer, useEffect } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 import { AuthState, reducer } from "./reducer";
 import sessionStorage from "@/shared/utils/sessionStorage";
@@ -27,7 +28,22 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [{ isLogin, accessToken, refreshToken, expiresIn }, dispatch] =
     useReducer(reducer, initalAuthState);
 
+  useEffect(() => {
+    const accessToken = Cookies.get("spotify_access_token");
+    if (!accessToken) return;
+
+    dispatch({
+      type: "LOGIN",
+      payload: {
+        accessToken,
+        refreshToken: Cookies.get("spotify_refresh_token"),
+        expiresIn: Cookies.get("spotify_expires_in"),
+      },
+    });
+  }, []);
+
   const login = async (code: string) => {
+    debugger;
     try {
       const { data } = await axios.post(
         `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/auth/login`,
@@ -42,6 +58,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
       });
 
       sessionStorage.setToken(accessToken, refreshToken, expiresIn);
+      // Save in Cookies
+      Cookies.set("spotify_access_token", accessToken);
+      Cookies.set("spotify_refresh_token", refreshToken);
+      Cookies.set("spotify_expires_in", expiresIn);
+
       window.history.pushState({}, "", "/");
     } catch (error) {
       console.log(error);
@@ -92,12 +113,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       window.location.assign("/login");
     }
   };
-
-  useEffect(() => {
-    loginSessionStorage();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     if (!refreshToken || !expiresIn) return;

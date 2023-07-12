@@ -7,6 +7,7 @@ import { SidebarPlaylistMenu } from "./SidebarPlaylistMenu";
 
 import spotifuLogo from "@/assets/icons/spotifu-logo.svg";
 import styles from "./Sidebar.module.css";
+import NavLink from "@/ui/NavLink";
 
 // TODO: Add active class when is active
 function SidebarCompoment() {
@@ -17,24 +18,21 @@ function SidebarCompoment() {
       <Image className={styles.logo} src={spotifuLogo} alt="logo spotifu" />
 
       <div className={styles.routes}>
-        <Link
-          href="/home"
-          // activeClassName="active"
-        >
+        <NavLink href="/" activeClassName={styles.active} exact>
           <span
             className={`${styles.icon} ${styles.iconHome}`}
             aria-label="Home Icon"
           ></span>{" "}
           Home
-        </Link>
+        </NavLink>
 
-        <Link href="/search">
+        <NavLink href="/search" activeClassName={styles.active}>
           <span
             className={`${styles.icon} ${styles.iconSearch}`}
             aria-label="Search Icon"
           ></span>{" "}
           Buscar
-        </Link>
+        </NavLink>
 
         <Link href="/">
           <span
