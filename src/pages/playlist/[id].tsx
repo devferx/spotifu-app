@@ -7,8 +7,7 @@ import { PlayerContext } from "@/context/PlayerContext";
 
 import { PlaylistTracks } from "@/ui/PlaylistTracks";
 import { LoadingView } from "@/ui/LoadingView";
-
-import styles from "@/styles/Playlist.module.css";
+import { PlaylistHeader } from "@/playlist/components/PlaylistHeader";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const playlistId = context.params?.id;
@@ -30,7 +29,6 @@ interface PlayslistPageProps {
 
 export default function PlayslistPage({ playlistId }: PlayslistPageProps) {
   const { playlistQuery } = usePlaylist(playlistId);
-  const { playPlaylist } = useContext(PlayerContext);
 
   if (playlistQuery.isLoading || !playlistQuery.data) {
     return <LoadingView />;
@@ -40,25 +38,7 @@ export default function PlayslistPage({ playlistId }: PlayslistPageProps) {
 
   return (
     <div>
-      <div className={styles.header}>
-        <img
-          width="300"
-          src={playlist.images[0].url}
-          alt={`${playlist.name} cover`}
-        />
-        <div className={styles.headerContent}>
-          <p className={styles.headerContentTitle}>{playlist.name}</p>
-          <p>{playlist.description}</p>
-          <p>{playlist.followers.total.toLocaleString()} SEGUIDORES</p>
-          <button
-            className={`${styles.headerContentBtn} button button-text`}
-            onClick={() => playPlaylist(playlist.tracks.items)}
-          >
-            Repoducir
-          </button>
-        </div>
-      </div>
-
+      <PlaylistHeader playlist={playlist} />
       <PlaylistTracks tracks={playlist.tracks.items} />
     </div>
   );
