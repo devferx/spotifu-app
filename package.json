@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "ts:check": "tsc --noEmit",
+    "ts-check": "tsc --noEmit",
     "test": "jest --watch"
   },
   "dependencies": {

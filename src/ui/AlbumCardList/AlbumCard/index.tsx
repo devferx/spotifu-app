@@ -32,14 +32,13 @@ export const AlbumCard = ({ album }: AlbumCardProps) => {
     );
   }
 
-  const handleClick = () => {
-    isPlaylist
-      ? router.push(`/playlist/${album.id}`)
-      : router.push(`/album/${album.id}`);
-  };
+  const isAlbum = "artists" in album;
 
-  const isAlbum = album.type === "album";
-  const isPlaylist = album.type === "playlist";
+  const handleClick = () => {
+    isAlbum
+      ? router.push(`/album/${album.id}`)
+      : router.push(`/playlist/${album.id}`);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -53,7 +52,7 @@ export const AlbumCard = ({ album }: AlbumCardProps) => {
         </div>
         <p className={styles.title}>{album.name}</p>
         <p className={styles.artist}>
-          {isAlbum ? album.artists[0].name : album.name}
+          {isAlbum ? album.artists[0].name : album.owner.display_name}
         </p>
       </div>
     </div>
