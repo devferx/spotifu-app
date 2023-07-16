@@ -26,9 +26,9 @@ interface AuthProviderProps {
 
 const initalAuthState: AuthState = {
   isLogin: false,
-  accessToken: undefined,
-  refreshToken: undefined,
-  expiresIn: undefined,
+  accessToken: Cookies.get("spotify_access_token"),
+  refreshToken: Cookies.get("spotify_refresh_token"),
+  expiresIn: Cookies.get("spotify_expires_in"),
 };
 
 export function AuthProvider({ children }: AuthProviderProps) {
