@@ -4,7 +4,6 @@ import { SpotifyContext } from "@/context/SpotifyContext";
 
 import { AlbumCardList } from "@/ui/AlbumCardList";
 import { ResultTracks } from "@/search/components/ResultTracks";
-import { Album } from "@/interfaces";
 
 export default function SearchPage() {
   const { search, searchResults, albumsResults } = useContext(SpotifyContext);

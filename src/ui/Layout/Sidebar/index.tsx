@@ -1,5 +1,4 @@
 import { useContext, memo } from "react";
-import Link from "next/link";
 import Image from "next/image";
 
 import { SpotifyContext } from "@/context/SpotifyContext";
@@ -9,9 +8,8 @@ import spotifuLogo from "@/assets/icons/spotifu-logo.svg";
 import styles from "./Sidebar.module.css";
 import NavLink from "@/ui/NavLink";
 
-// TODO: Add active class when is active
 function SidebarCompoment() {
-  const { userPlaylists, featuredPlaylists } = useContext(SpotifyContext);
+  const { userPlaylists } = useContext(SpotifyContext);
 
   return (
     <aside className={styles.sidebar}>
@@ -23,7 +21,7 @@ function SidebarCompoment() {
             className={`${styles.icon} ${styles.iconHome}`}
             aria-label="Home Icon"
           ></span>{" "}
-          Home
+          Inicio
         </NavLink>
 
         <NavLink href="/search" activeClassName={styles.active}>
@@ -33,18 +31,9 @@ function SidebarCompoment() {
           ></span>{" "}
           Buscar
         </NavLink>
-
-        <Link href="/">
-          <span
-            className={`${styles.icon} ${styles.iconCreditCard}`}
-            aria-label="Credit Card Icon"
-          ></span>{" "}
-          Premium
-        </Link>
       </div>
 
       <SidebarPlaylistMenu title="Tu Biblioteca" playlists={userPlaylists} />
-      <SidebarPlaylistMenu title="Playlists" playlists={featuredPlaylists} />
     </aside>
   );
 }

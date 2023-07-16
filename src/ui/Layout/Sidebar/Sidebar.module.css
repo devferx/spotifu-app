@@ -2,19 +2,24 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 280px;
   height: calc(100vh - 48px);
+  padding: 4px;
   background-color: var(--gray60);
   padding-top: 20px;
   overflow-y: auto;
 }
 
 .logo {
-  padding-left: 16px;
+  padding-left: 12px;
 }
 
 .routes {
-  margin-top: 24px;
+  background-color: var(--gray40);
+  border-radius: 8px;
 }
 
 .routes a {
@@ -22,7 +27,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   padding: 8px;
   padding-left: 20px;
   margin: 8px 0;
@@ -30,25 +35,15 @@
   font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
-  line-height: 16px;
-  color: var(--grey10);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--gray10);
 
   text-decoration: none;
 }
 
 a.active {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-a.active::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  content: "";
-  background-color: var(--primary);
-  color: white;
+  color: var(--white);
 }
 
 .icon {

@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 
 import { Playlist } from "@/interfaces";
+import library from "@/assets/icons/library.svg";
 
 import styles from "./SidebarPlaylistMenu.module.css";
 import NavLink from "@/ui/NavLink";
+import Image from "next/image";
 
 interface SidebarPlaylistMenuProps {
   title: string;
@@ -16,55 +17,46 @@ export const SidebarPlaylistMenu = ({
   title,
   playlists,
 }: SidebarPlaylistMenuProps) => {
-  const [playlistToRender, setPlaylistToRender] = useState(playlists);
-
-  useEffect(() => {
-    setPlaylistToRender(playlists.slice(0, 5));
-  }, [playlists]);
-
-  const showAllPlaylists = () => {
-    setPlaylistToRender(playlists);
-  };
-
-  const showLessPlaylists = () => {
-    setPlaylistToRender(playlists.slice(0, 5));
-  };
-
   return (
-    <ul className={styles.container}>
-      <li className={styles.listTitle}>{title}</li>
-      {playlistToRender.map((playlist, i) => (
-        <li key={playlist?.id || i} className={styles.listItem}>
-          {playlist === null ? (
-            <Link href="/">
-              <Skeleton baseColor="#e3d3d3" />
-            </Link>
-          ) : (
-            <NavLink
-              activeClassName={styles.activePlaylist}
-              href={`/playlist/${playlist.id}`}
-            >
-              {playlist.name}
-            </NavLink>
-          )}
-        </li>
-      ))}
-      {playlistToRender.length < playlists.length && (
-        <li className={styles.listItem}>
-          <button className={styles.showAll} onClick={showAllPlaylists}>
-            Show all
-          </button>
-        </li>
-      )}
-
-      {/* Show Less button */}
-      {playlistToRender.length > 5 && (
-        <li className={styles.listItem}>
-          <button className={styles.showLess} onClick={showLessPlaylists}>
-            Show less
-          </button>
-        </li>
-      )}
-    </ul>
+    <section className={styles.container}>
+      <header className={styles.listHeader}>
+        <Image width={24} src={library} alt="Library" />
+        {title}
+      </header>
+      <ul className={styles.list}>
+        {playlists.map((playlist, i) => (
+          <li key={playlist?.id || i} className={styles.listItem}>
+            {playlist === null ? (
+              <Link href="/">
+                <Skeleton baseColor="#e3d3d3" />
+              </Link>
+            ) : (
+              <NavLink
+                activeClassName={styles.activePlaylist}
+                href={`/playlist/${playlist.id}`}
+              >
+                <Image
+                  className={styles.itemImg}
+                  width={48}
+                  height={48}
+                  src={playlist?.images[0].url}
+                  alt="Playlist"
+                />
+                <div className={styles.itemInfo}>
+                  <p className={styles.itemName}>
+                    {playlist.name.length > 18
+                      ? playlist.name.slice(0, 18) + "..."
+                      : playlist.name}
+                  </p>
+                  <p className={styles.itemOwner}>
+                    {playlist.owner.display_name}{" "}
+                  </p>
+                </div>
+              </NavLink>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 };

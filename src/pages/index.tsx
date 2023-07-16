@@ -1,12 +1,13 @@
 import { useContext, useEffect } from "react";
+import Head from "next/head";
 import { GetServerSideProps } from "next";
-
-import { refreshToken } from "./api/auth/refresh";
 
 import { AuthContext, RefreshData } from "@/context/AuthContext";
 import { SpotifyContext } from "@/context/SpotifyContext";
 import { FlatPlaylistList } from "@/home/components/FlatPlaylistList";
 import { AlbumCardList } from "@/ui/AlbumCardList";
+
+import { refreshToken } from "./api/auth/refresh";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   let code = context.query.code;
@@ -25,11 +26,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       props: {
         code,
-        refreshData: undefined,
       },
     };
   }
 
+  console.log("not should be here");
   try {
     const { accessToken, expiresIn } = await refreshToken(
       spotify_refresh_token!
@@ -77,6 +78,10 @@ export default function HomePage({ code, refreshData }: HomePageProps) {
 
   return (
     <div>
+      <Head>
+        <title>Spotifu - Home</title>
+      </Head>
+
       <FlatPlaylistList />
       <AlbumCardList title="Nuevos Lanzamientos" albumList={newReleases} />
       <AlbumCardList
