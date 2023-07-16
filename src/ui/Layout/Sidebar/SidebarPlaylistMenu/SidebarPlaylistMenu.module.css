@@ -1,28 +1,75 @@
 .container {
+  flex: 1;
   display: flex;
+  gap: 12px;
   flex-direction: column;
   gap: 8px;
-  padding: 24px;
-  padding-bottom: 0;
+  max-width: 100%;
+  height: min-content;
+  background: var(--gray40);
+  border-radius: 8px;
+}
+
+.listHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  user-select: none;
+  padding: 24px 16px 0px 16px;
+}
+
+.list {
+  flex: 1;
+
+  overflow-y: auto;
   list-style: none;
   color: var(--gray10);
 }
 
-.listTitle {
-  font-weight: 800;
-  font-size: 12px;
-  text-transform: uppercase;
-  user-select: none;
+.itemImg {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.itemOwner {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--gray10);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.itemName {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--white);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .listItem a {
+  display: flex;
+  gap: 8px;
+  padding: 8px 16px;
   color: var(--grey10);
   text-decoration: none;
 }
 
-.listItem a.activePlaylist {
-  color: #fff;
-  font-weight: 500;
+.listItem a:hover {
+  background-color: var(--gray30);
+}
+
+a.activePlaylist .itemName {
+  color: var(--primary);
+  font-weight: 600;
 }
 
 .showAll,
