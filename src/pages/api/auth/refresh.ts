@@ -10,13 +10,7 @@ type Data =
       message: string;
     };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-  if (req.method !== "POST") return;
-
-  const refreshToken = req.body.refreshToken;
+export const refreshToken = async (refreshToken: string) => {
   const spotifyApi = new SpotifyWebApi({
     redirectUri: process.env.NEXT_PUBLIC_URL,
     clientId: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_KEY,
@@ -24,14 +18,27 @@ export default async function handler(
     refreshToken,
   });
 
-  try {
-    const { body } = await spotifyApi.refreshAccessToken();
-    const { access_token, expires_in } = body;
+  const { body } = await spotifyApi.refreshAccessToken();
+  const { access_token, expires_in } = body;
 
-    res.status(200).json({
-      accessToken: access_token,
-      expiresIn: expires_in,
-    });
+  return {
+    accessToken: access_token,
+    expiresIn: expires_in,
+  };
+};
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<Data>
+) {
+  if (req.method !== "POST") return;
+
+  const refreshToken = req.body.refreshToken;
+
+  try {
+    const { accessToken, expiresIn } = await refreshToken(refreshToken);
+
+    res.status(200).json({ accessToken, expiresIn });
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: "Invalid code" });
